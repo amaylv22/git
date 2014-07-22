@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Control de versiones</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../../../KonoMngr/style/icons/konoicn.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../../../../KonoMngr/style/konoguides.css" />
+		<script src="../../../../../KonoMngr/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+  				TeX: { equationNumbers: { autoNumber: "AMS" } }
+			});</script>
+		<link rel="stylesheet" href="../../../../../KonoMngr/highlight/styles/googlecode.css">
+		<script src="../../../../../KonoMngr/highlight/highlight.pack.js" type="text/javascript"></script>
+		<script>hljs.initHighlightingOnLoad();</script>		
+	</head>
+	
+	<body class="kg-content">
+		<header>
+			<h1>Control de versiones</h1>
+		</header>
+		
+		<article class="subsection">
+			<p>Se llama <b>control de versiones</b> a la <em>gestión</em> de los diversos <em>cambios</em> que se realizan sobre los elementos de algún producto o una configuración del mismo. Una <b>versión</b>, revisión o edición de un producto, es el <em>estado</em> en el que se encuentra el mismo <em>en un momento dado</em> de su desarrollo o modificación.</p>
+			<h2 id="">características</h2>
+			<p>Un sistema de control de versiones debe proporcionar:</p>
+			<ul>
+			    <li>Mecanismo de <em>almacenamiento</em> de los elementos que deba gestionar (ej. archivos de texto, imágenes, documentación...).</li>
+			    <li><em>Posibilidad de realizar cambios</em> sobre los elementos almacenados (ej. modificaciones parciales, añadir, borrar, renombrar o mover elementos).</li>
+			    <li><b>Registro histórico</b> de las <em>acciones realizadas</em> con cada elemento o conjunto de elementos (normalmente <em>pudiendo</em> volver o <em>extraer un estado anterior</em> del producto).</li>    
+			</ul>
+			<p>Aunque no es estrictamente necesario, suele ser muy útil tener capacidad de:</p>
+			<ul>
+			    <li><em>generar informes</em> con los cambios introducidos entre dos versiones, informes de estado, marcado con nombre identificativo de la versión de un conjunto de ficheros, etc.</li>  
+			</ul>
+		</article>
+		
+		<article class="subsection">
+		    <h1>Terminología</h1>
+		    <p>La terminología empleada puede variar de sistema a sistema, pero a continuación se describen algunos términos de uso común.</p>
+		    <dl>
+		        <dt>Repositorio</dt>
+		            <dd><ul>
+		            	<li>lugar en el que se almacenan los <em>datos actualizados</em> e <em>históricos de cambios</em>.</li>
+		            	<li>También denominado <em>depósito</em> o <em>depot</em>.</li>
+		            	<li>Puede ser un sistema de archivos en un disco duro, un banco de datos, etc.</li>
+		            </ul>
+		            </dd>
+		        <dt>Módulo</dt>
+		            <dd><ul>
+		            	<li>Conjunto de <em>directorios</em> o <em>archivos</em> dentro del repositorio que pertenecen a un <em>proyecto común</em>.</li>
+		            </ul>
+		            </dd>
+		        <dt>Revisión ("version")</dt>
+		        	<dd><ul>
+		        		<li><em>Versión determinada</em> de la información que se gestiona</li>
+		        		<li>Hay sistemas que identifican las revisiones con un contador (Ej. subversion).</li>
+		        		<li>Hay sistemas que identifican las revisiones mediante un código de detección de modificaciones (Ej. Git usa <em>SHA1</em>).</li>
+		        	</ul>
+		        	</dd>
+		        <dt>Rotular ("tag")</dt>
+		        	<dd><ul>
+		        		<li>Le da a alguna versión de cada uno de los ficheros del módulo en desarrollo en un momento preciso un <em>nombre común ("etiqueta" o "rótulo")</em> para asegurarse de reencontrar ese estado de desarrollo posteriormente bajo ese nombre.</li>
+		        		<li>Permiten identificar de forma fácil revisiones importantes en el proyecto. Se suelen usar tags para identificar el contenido de las <em>versiones publicadas</em> del proyecto.</li>
+		        		<li>En algunos sistemas se considera un tag como una <em>rama</em> en la que los ficheros no evolucionan, están congelados.</li>
+		        	</ul>
+		        	</dd>
+		        <dt>Línea base ("Baseline")</dt>
+		        	<dd><ul>
+		        		<li>Revisión aprobada de un documento o fichero fuente, a partir del cual se pueden realizar cambios subsiguientes.</li>
+		        	</ul>
+		        	</dd>
+		        <dt>Abrir rama ("branch") o ramificar</dt>
+		        	<dd><ul>
+		        		<li>Un módulo puede ser <em>branched</em> o <em>bifurcado</em> en un instante de tiempo de forma que, desde ese momento en adelante se tienen dos <em>copias (ramas)</em> que <em>evolucionan de forma independiente</em> siguiendo su propia línea de desarrollo.</li>
+		        		<li>Siempre es posible hacer un <b>"merge"</b> de las modificaciones de ambas ramas</li>
+		        		<li>Posibilita la creación de <em>"ramas de prueba"</em> que contengan código para evaluación, si se decide que las modificaciones realizadas en la "rama de prueba" sean preservadas, se hace un <em>"merge"</em> con la rama principal.</li>
+		        		<li><em>Motivos habituales</em> para la creación de ramas: creación de nuevas funcionalidades o corrección de errores.</li>
+		        	</ul>
+		        	</dd>
+		        <dt>Desplegar ("Check-out", "checkout", "co")</dt>
+		        	<dd><ul>
+		        		<li>Crea una copia de trabajo local desde el repositorio.</li>
+		        		<li>Se puede especificar una revisión concreta.</li>
+		        		<li>Por defecto se suele obtener la última.</li>	
+		        	</ul>
+		        	</dd>
+		        <dt>"Publicar" o "Enviar" ("commit", "check-in", "ci", "install", "submit")</dt>
+		        	<dd><ul>
+		        		<li>Sucede cuando una copia de los cambios hechos a una copia local es escrita o <em>integrada sobre repositorio</em>.</li>
+		        	</ul>
+		        	</dd>
+		        <dt>Integración o fusión ("merge")</dt>
+		        	<dd><ul>
+		        		<li>Une dos conjuntos de cambios sobre un fichero o un conjunto de ficheros en una revisión unificada de dicho fichero o ficheros.</li>
+		        		<li>Los momentos en los que puede suceder son:
+		        			<ul>
+		        				<li>cuando un usuario, trabajando en esos ficheros, <em>actualiza</em> su copia local con los cambios realizados, y añadidos al repositorio, por otros usuarios. Análogamente, este mismo proceso puede ocurrir en el repositorio cuando un usuario intenta <em>check-in</em> sus cambios;</li>
+		        				<li>después de que el código haya sido <em>branched</em>, y un problema anterior al branching sea arreglado en una rama, y se necesite incorporar dicho arreglo en la otra;</li>
+		        				<li>después de que los ficheros hayan sido <em>branched</em>, desarrollados de forma independiente por un tiempo, y que entonces se haya requerido que fueran fundidos de nuevo en un único trunk unificado.</li>	
+		        			</ul>
+		        		</li>	
+		        	</ul>
+		        	</dd>
+		        <dt>Conflicto</dt>
+		        	<dd><p>Un conflicto ocurre en las siguientes circunstancias:</p>
+		        	<ol>
+		        		<li>Los usuarios X e Y despliegan versiones del archivo A en que las líneas n1 hasta n2 son comunes.</li>
+		        		<li>El usuario X envía cambios entre las líneas n1 y n2 al archivo A.</li>
+		        		<li>El usuario Y no actualiza el archivo A tras el envío del usuario X.</li>
+		        		<li>El usuario Y realiza cambios entre las líneas n1 y n2.</li>
+		        		<li>El usuario Y intenta posteriormente enviar esos cambios al archivo A.</li>
+		        	</ol>
+		        	<p>El sistema es incapaz de fusionar los cambios. El usuario Y debe resolver el conflicto combinando los cambios, o eligiendo uno de ellos para descartar el otro.</p>
+		        	</dd>
+		    </dl>
+		</article>
+		
+		<article class="subsection">
+			<h1>Formas de colaborar</h1>
+			<p>Para colaborar en un proyecto usando un sistema de control de versiones lo primero que hay que hacer es <em>crearse una copia local</em> obteniendo información del repositorio. A continuación el usuario puede modificar la copia. Existen <em>dos esquemas</em> básicos de funcionamiento para que los usuarios puedan ir <em>aportando sus modificaciones</em>:</p>
+			<dl>
+				<dt>Forma exclusiva:</dt>
+					<dd><ul>
+						<li>comunicar al repositorio el elemento que se desea modificar;</li>
+						<li>el sistema se encargará de impedir que otro usuario pueda modificar dicho elemento;</li>
+						<li>hecha la modificación, ésta se comparte con el resto de colaboradores;</li>
+						<li>si se ha terminado de modificar un elemento entonces se libera ese elemento para que otros lo puedan modificar.</li>
+					</ul>
+					</dd>
+				<dt>Forma colaborativa:</dt>
+					<dd><ul>
+						<li>cada usuario modifica la copia local;</li>
+						<li>cuando el usuario decide compartir los cambios el sistema automáticamente intenta combinar las diversas modificaciones;</li>
+						<li>principales problemas:
+							<ul>
+								<li>posible aparición de conflictos que deban ser solucionados manualmente,</li>
+								<li>posibles inconsistencias que surjan al modificar el mismo fichero por varias personas no coordinadas.</li>
+							</ul>
+						</li>
+						<li>semántica <em>no apropiada</em> para <em>ficheros binarios</em>.</li>
+					</ul>
+					</dd>
+			</dl>
+		</article>
+		
+	</body>
+</html>	

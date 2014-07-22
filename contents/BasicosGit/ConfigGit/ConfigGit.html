@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Configurando Git por primera vez</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../../../KonoMngr/style/icons/konoicn.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../../../../KonoMngr/style/konoguides.css" />
+		<script src="../../../../../KonoMngr/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+  				TeX: { equationNumbers: { autoNumber: "AMS" } }
+			});</script>
+		<link rel="stylesheet" href="../../../../../KonoMngr/highlight/styles/googlecode.css">
+		<script src="../../../../../KonoMngr/highlight/highlight.pack.js" type="text/javascript"></script>
+		<script>hljs.initHighlightingOnLoad();</script>		
+	</head>
+	
+	<body class="kg-content">
+		<header>
+			<h1>Configurando Git por primera vez</h1>
+		</header>
+		
+		<article class="subsection">
+			<h1>Imstalación</h1>
+			<p>Para instalar Git en una distribución Linux con base Debian simplemente teclee en terminal:</p>
+			<pre><code>sudo apt-get install git</code></pre>
+			<p>Una referencia para la instalación de git en otros sistemas se encuentra en <a href="http://git-scm.com/book/es/Empezando-Instalando-Git" target="_blank">este enlace</a>.</p>
+		</article>
+		
+		<article class="subsection">
+		    <h1>Configurando Git por primera vez</h1>
+		    <p>Ahora que tienes Git en tu sistema, querrás hacer algunas cosas para personalizar tu entorno de Git &mdash;controlar el aspecto y funcionamiento de Git. Sólo es necesario hacer estas cosas <em>una vez</em>; se mantendrán entre actualizaciones. También <em>puedes cambiarlas</em> en cualquier momento volviendo a ejecutar los comandos correspondientes.</p>
+		    
+		    <h2 id="">identidad</h2>
+		    <p>Establece el nombre de usuario y el correo electrónico. Esto es importante porque las <em>confirmaciones de cambios (commits)</em> en Git <em>usan esta información</em>, y es introducida de manera inmutable en los commits que envías:</p>
+		    <pre><code>$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com</code></pre>
+            <article class="note">si especificas la opción <em>--global</em> Git siempre usará esta información para todo lo que hagas en ese sistema. Si quieres sobrescribir esta información con otro nombre o dirección de correo para proyectos específicos, puedes ejecutar el comando <em>sin la opción --global</em> cuando estés en ese proyecto.</article>    
+            <h2 id="">editor</h2>
+            <p>Puedes elegir el editor de texto por defecto que se utilizará <em>cuando Git necesite que introduzcas un mensaje</em>. Si no indicas nada, Git usa el editor por defecto de tu sistema, que generalmente es Vi o Vim. Si quieres usar otro editor de texto, como Emacs, puedes hacer lo siguiente:</p>
+            <pre><code>$ git config --global core.editor emacs</code></pre>
+            
+            <h2 id="">herramienta de diferencias</h2>
+            <p>Otra opción útil que puede que quieras configurar es la herramienta de diferencias por defecto, <em>usada para resolver conflictos de unión (merge)</em>. Digamos que quieres usar vimdiff:</p>
+            <pre><code>$ git config --global merge.tool vimdiff</code></pre>
+            <p>Git acepta kdiff3, tkdiff, meld, xxdiff, emerge, vimdiff, gvimdiff, ecmerge, y opendiff como herramientas válidas. También puedes configurar la herramienta que tú quieras.</p>
+            
+            <h2 id="">comprobando tu configuración</h2>
+            <p>Si quieres comprobar tu configuración, puedes usar el comando <em>git config --list</em> para listar todas las propiedades que Git ha configurado:</p>
+            <pre><code>$ git config --list
+$ git config -l</code></pre>
+            <p>Puede que veas claves repetidas, porque Git lee la misma clave de distintos archivos. En ese caso, Git usa el <em>último valor para cada clave</em> única que ve.</p>
+            <p>También puedes comprobar qué valor cree Git que tiene una clave específica ejecutando <em>git config {clave}</em>:</p>
+            <pre><code>$ git config user.name</code></pre>
+            
+		    
+		</article>
+		
+	</body>
+</html>	

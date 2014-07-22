@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Obteniendo un repositorio</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../../../KonoMngr/style/icons/konoicn.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../../../../KonoMngr/style/konoguides.css" />
+		<script src="../../../../../KonoMngr/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+  				TeX: { equationNumbers: { autoNumber: "AMS" } }
+			});</script>
+		<link rel="stylesheet" href="../../../../../KonoMngr/highlight/styles/googlecode.css">
+		<script src="../../../../../KonoMngr/highlight/highlight.pack.js" type="text/javascript"></script>
+		<script>hljs.initHighlightingOnLoad();</script>		
+	</head>
+	
+	<body class="kg-content">
+		<header>
+			<h1>Obteniendo un repositorio</h1>
+		</header>
+		
+		<article class="subsection">
+			<p>Puedes obtener un proyecto Git de dos maneras:</p>
+			<ol>
+			    <li><em>tomar</em> un proyecto o directorio existente e importarlo en Git,</li>
+			    <li><em>clonar</em> un repositorio Git existente desde otro servidor.</li>
+			</ol>
+		</article>
+		
+		<article class="subsection">
+		    <h1>Inicializando un repositorio en un directorio existente</h1>
+		    <p>Si estás empezando el seguimiento en Git de un proyecto existente, necesitas ir al directorio del proyecto y escribir:</p>
+		    <pre><code>git init</code></pre>
+		    <p>Esto crea un nuevo subdirectorio llamado <b>.git</b> que contiene todos los archivos necesarios del repositorio &mdash;un esqueleto de un repositorio Git. <em>Todavía no hay nada en tu proyecto que esté bajo seguimiento</em>.</p>
+		    <p>Si deseas empezar a controlar versiones de archivos existentes, debes comenzar el seguimiento de esos archivos <em>(add)</em> y hacer una confirmación inicial <em>(commit)</em>. Puedes conseguirlo con unos pocos comandos:</p>
+		    <ul>
+		        <li><b>Especificar qué archivos quieres controlar</b>:
+		            <ul>
+		                <li><em>todos</em>:
+		                <pre><code>git add -A</code></pre></li>
+		                <li><em>alguno</em> en particular:
+		                <pre><code>git add *.c</code></pre></li>
+		            </ul>
+		        </li>
+		        <li><b>Confirmar los cambios</b>: agregando un mensaje para identificarlos
+		        <pre><code>git commit –m 'versión inicial del proyecto'</code></pre></li>
+		    </ul>
+		</article>
+		
+		<article class="subsection">
+		    <h1>Clonando un repositorio existente</h1>
+		    <p>Si deseas obtener una copia de un repositorio Git existente el comando que necesitas es <em>git clone</em>. Cada versión de cada archivo de la historia del proyecto es descargado cuando ejecutas <em>git clone</em>. De hecho, si el disco de tu servidor se corrompe, puedes usar cualquiera de los clones en cualquiera de los clientes para devolver al servidor al estado en el que estaba cuando fue clonado</p>
+		    <p>Puedes clonar un repositorio con <em>git clone [url]</em>. Por ejemplo, si quieres clonar la librería Ruby llamada Grit, harías algo así:</p>
+		    <pre><code>git clone git://github.com/schacon/grit.git</code></pre>
+		    <p>Esto <em>crea un directorio</em> llamado <em>"grit"</em>, inicializa un directorio <em>.git</em> en su interior, descarga toda la información de ese repositorio, y saca una <em>copia</em> de trabajo de la <em>última versión</em>.</p>
+		    
+		    <h2 id="">personalizar el nombre del directorio clonado</h2>
+		    <p>Si quieres clonar el repositorio a un directorio con otro nombre que no sea grit, puedes especificarlo con la siguiente opción de línea de comandos:</p>
+		     <pre><code>git clone git://github.com/schacon/grit.git mygrit</code></pre>
+		     <article class="note">Git te permite usar distintos protocolos de transferencia. El ejemplo anterior usa el protocolo <em>git://</em>, pero también te puedes encontrar con <em>http(s)://</em> o <em>usuario@servidor:/ruta.git</em>, que utiliza el protocolo de transferencia SSH. </article>
+		</article>
+		
+	</body>
+</html>	

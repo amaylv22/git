@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Buenas prácticas</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../../../KonoMngr/style/icons/konoicn.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../../../../KonoMngr/style/konoguides.css" />
+		<script src="../../../../../KonoMngr/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+  				TeX: { equationNumbers: { autoNumber: "AMS" } }
+			});</script>
+		<link rel="stylesheet" href="../../../../../KonoMngr/highlight/styles/googlecode.css">
+		<script src="../../../../../KonoMngr/highlight/highlight.pack.js" type="text/javascript"></script>
+		<script>hljs.initHighlightingOnLoad();</script>		
+	</head>
+	
+	<body class="kg-content">
+		<header>
+			<h1>Buenas prácticas</h1>
+		</header>
+		
+		<article class="subsection">
+			<p>Cada desarrollador o equipo de desarrollo puede hacer uso de Git de la forma que le parezca conveniente. Sin embargo <em>una buena práctica es la siguiente</em>:</p>
+			<p>Se deben utilizar 4 tipos de ramas: Master, Development, Features, y Hotfix.</p>
+			<dl>
+				<dt>Master:</dt>
+					<dd><ul>
+						<li>Es la <em>rama principal</em>.</li>
+						<li>Contiene el repositorio que se encuentra publicado en producción, por lo que debe estar siempre estable.</li>
+					</ul>
+					</dd>
+				<dt>Development:</dt>
+					<dd><ul>
+						<li>Es una rama sacada de master.</li>
+						<li>Todas las nuevas funcionalidades se deben integrar en esta rama. </li>
+						<li>Luego que se realice la integración y se corrijan los errores (en caso de haber alguno), es decir que la rama se encuentre estable.</li>
+						<li>Se puede hacer un merge de development sobre la rama master.</li>
+					</ul>
+					</dd>
+				<dt>Features:</dt>
+					<dd><ul>
+						<li>Cada nueva funcionalidad se debe realizar en una rama nueva, específica para esa funcionalidad.</li>
+						<li>Estas se deben sacar de development.</li>
+						<li>Una vez que la funcionalidad esté pronta, se hace un merge de la rama sobre development, donde se integrará con las demás funcionalidades.</li>
+					</ul>
+					</dd>
+				<dt>Hotfix:</dt>
+					<dd><ul>
+						<li>Son bugs que surgen en producción, por lo que se deben arreglar y publicar de forma urgente.</li>
+						<li>Son ramas sacadas de master.</li>
+						<li>Una vez corregido el error, se debe hacer un merge de la rama sobre master.</li>
+						<li>Al final, para que no quede desactualizada, se debe realizar el merge de master sobre development.</li>
+					</ul>
+					</dd>
+			</dl>
+		</article>
+		
+	</body>
+</html>	

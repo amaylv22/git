@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Guardando cambios en el repositorio</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../../../KonoMngr/style/icons/konoicn.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../../../../KonoMngr/style/konoguides.css" />
+		<script src="../../../../../KonoMngr/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+  				TeX: { equationNumbers: { autoNumber: "AMS" } }
+			});</script>
+		<link rel="stylesheet" href="../../../../../KonoMngr/highlight/styles/googlecode.css">
+		<script src="../../../../../KonoMngr/highlight/highlight.pack.js" type="text/javascript"></script>
+		<script>hljs.initHighlightingOnLoad();</script>		
+	</head>
+	
+	<body class="kg-content">
+		<header>
+			<h1>Guardando cambios en el repositorio</h1>
+		</header>
+		
+		<article class="subsection">
+			<p>Tienes un repositorio Git completo, y una <em>copia de trabajo</em> de los archivos de ese proyecto. Necesitas hacer algunos cambios, y <em>confirmar instantáneas</em> de esos cambios a tu repositorio cada vez que el proyecto alcance un estado que desees grabar.</p>
+			<p>Cada archivo de tu directorio de trabajo puede estar en uno de estos dos estados:</p>
+			<ul>
+			    <li><em>bajo seguimiento</em> <b>(tracked)</b>: son aquellos archivos que existían en la última instantánea; pueden estar:
+			        <ul>
+			            <li>sin modificaciones,</li>
+			            <li>modificados,</li>
+			            <li>preparados</li>
+			        </ul>
+			        
+			    </li>
+			    <li><em>sin seguimiento</em> <b>(untracked)</b>: son todos los demás archivos &mdash;cualquier archivo de tu directorio que no estuviese en tu última instantánea ni está en tu área de preparación.</li>
+			</ul>
+			<article class="note">La primera vez que clonas un repositorio, todos tus archivos estarán bajo seguimiento y sin modificaciones, ya que los acabas de copiar y no has modificado nada.</article>
+			
+			<p>A medida que editas archivos, Git los ve como <em>modificados</em>, porque los has cambiado desde tu última confirmación. <em>Preparas</em> estos archivos modificados <em>y luego confirmas</em> todos los cambios que hayas preparado, y el ciclo se repite. Este proceso queda ilustrado en la siguiente figura.</p>
+			<figure>
+			    <img src="media/CicloVida.png" alt="alt-text" width="px" height="px">
+			    <figcaption>El ciclo de vida del estado de los archivos de un repositorio</figcaption>
+			</figure>
+			
+			<p>A continuación de abordan diferentes tópicos de carcater práctico para el manejo del repositorio. Estos son:</p>
+			<li><a href="#COMPESTADO" target="_self">Comprobando el estado de tus archivos</a></li>
+			<li><a href="" target="_self">Seguimiento de nuevos archivos</a></li>
+			<li><a href="" target="_self">Preparando archivos modificados</a></li>
+			<li><a href="" target="_self">Ignorando archivos</a></li>
+			<li><a href="" target="_self">Viendo tus cambios preparados y no preparados</a></li>
+			<li><a href="" target="_self">Confirmando tus cambios</a></li>
+			<li><a href="" target="_self">Saltándote el área de preparación</a></li>
+			<li><a href="" target="_self">Eliminando archivos</a></li>
+			<li><a href="" target="_self">Moviendo archivos</a></li>
+			
+		</article>
+		
+		<article class="subsection">
+		    <h1 id="COMPESTADO">Comprobando el estado de tus archivos</h1>
+		    <p></p>
+		</article>
+		
+	</body>
+</html>	

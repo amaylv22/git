@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Fundamentos de Git</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../../../KonoMngr/style/icons/konoicn.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../../../../KonoMngr/style/konoguides.css" />
+		<script src="../../../../../KonoMngr/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+  				TeX: { equationNumbers: { autoNumber: "AMS" } }
+			});</script>
+		<link rel="stylesheet" href="../../../../../KonoMngr/highlight/styles/googlecode.css">
+		<script src="../../../../../KonoMngr/highlight/highlight.pack.js" type="text/javascript"></script>
+		<script>hljs.initHighlightingOnLoad();</script>		
+	</head>
+	
+	<body class="kg-content">
+		<header>
+			<h1>Fundamentos de Git</h1>
+		</header>
+		
+		<article class="subsection">
+			<h1>Instantáneas, no diferencias</h1>
+			<p>La <em>principal diferencia</em> entre Git y cualquier otro VCS (Subversion y compañía incluidos) es <em>cómo</em> Git <em>modela sus datos</em>.</p>
+			<ul>
+				<li>La mayoría de los <em>demás sistemas</em> almacenan la información como una <em>lista de cambios</em> en los archivos.</li>
+				<li>modelan la información que almacenan como un conjunto de archivos y las modificaciones hechas sobre cada uno de ellos a lo largo del tiempo, como ilustra en la siguiente figure</li>
+				<figure>
+					<img src="media/OtrosSistemas.png" alt="alt-text" width="px" height="px">
+					<figcaption>Otros sistemas tienden a almacenar los datos como cambios de cada archivo respecto a una versión base.</figcaption>
+				</figure>
+				<li><em>Git modela</em> sus datos más como un <em>conjunto de instantáneas</em> de un mini sistema de archivos.</li>
+				<li>Cada vez que <em>confirmas un cambio</em>, o guardas el estado de tu proyecto en Git, él básicamente hace una <em>foto</em> del aspecto de todos tus archivos en ese momento, y guarda una <em>referencia a esa instantánea</em>.</li>
+				<li>Para ser eficiente, si los archivos <em>no se han modificado</em>, Git <em>no almacena el archivo de nuevo</em>, sólo un enlace al archivo anterior idéntico que ya tiene almacenado.</li>
+				<figure>
+					<img src="media/GitModelo.png" alt="alt-text" width="px" height="px">
+					<figcaption> Git almacena la información como instantáneas del proyecto a lo largo del tiempo.</figcaption>
+				</figure>
+				<li>Esto hace que Git se parezca más a un <em>mini sistema de archivos</em> con algunas herramientas tremendamente potentes construidas sobre él, que a un VCS.</li>
+			</ul>
+			
+			<h2 id="">puntos a destacar</h2>
+			<p>Algunos de los puntos a destacar de Git con respecto al resto de VCSs son:</p>
+			<ul>
+				<li><b>Casi cualquier operación es local</b>. La mayoría de las operaciones en Git sólo necesitan archivos y recursos locales para operar. Por lo general no se necesita información de ningún otro ordenador de tu red.</li>
+				<li><b>Git tiene integridad</b>. Todo en Git es verificado mediante una <em>suma de comprobación (checksum)</em> antes de ser almacenado, y es identificado a partir de ese momento mediante dicha suma. Esto significa que es imposible cambiar los contenidos de cualquier archivo o directorio sin que Git lo sepa. No puedes perder información durante su transmisión o sufrir corrupción de archivos sin que Git lo detecte.</li>
+				<li><b>Git generalmente sólo añade información</b>. Cuando realizas acciones en Git, casi todas ellas sólo añaden información a la base de datos de Git. Es muy difícil conseguir que el sistema haga algo que no se pueda deshacer, o que de algún modo borre información. Después de confirmar una instantánea en Git, es muy difícil de perder, especialmente si <em>envías (push)</em> tu base de datos a otro repositorio con regularidad.</li>
+			</ul>
+		</article>
+		
+	</body>
+</html>	
