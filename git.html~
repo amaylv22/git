@@ -41,6 +41,8 @@
 				<h1>Primeros pasos con Git</h1>
 				<ol>
 					<li><a href="contents/PrimerosPasos/ObteniendoRepositorio/ObteniendoRepositorio.html" target="_self">Obteniendo un repositorio</a></li>
+					<li><a href="contents/PrimerosPasos/GuardandoCambiosRepo/GuardandoCambiosRepo.html" target="_self">Guardando cambios en el repositorio</a></li>
+                    
 				</ol>
 			</section>
 			

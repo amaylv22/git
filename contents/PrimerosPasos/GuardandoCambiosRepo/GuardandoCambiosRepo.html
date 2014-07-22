@@ -45,20 +45,63 @@
 			
 			<p>A continuación de abordan diferentes tópicos de carcater práctico para el manejo del repositorio. Estos son:</p>
 			<li><a href="#COMPESTADO" target="_self">Comprobando el estado de tus archivos</a></li>
-			<li><a href="" target="_self">Seguimiento de nuevos archivos</a></li>
-			<li><a href="" target="_self">Preparando archivos modificados</a></li>
-			<li><a href="" target="_self">Ignorando archivos</a></li>
-			<li><a href="" target="_self">Viendo tus cambios preparados y no preparados</a></li>
-			<li><a href="" target="_self">Confirmando tus cambios</a></li>
-			<li><a href="" target="_self">Saltándote el área de preparación</a></li>
-			<li><a href="" target="_self">Eliminando archivos</a></li>
-			<li><a href="" target="_self">Moviendo archivos</a></li>
+			<li><a href="#SIGUIENDONA" target="_self">Seguimiento de nuevos archivos</a></li>
+			<li><a href="#PREPARANDO_ARCHIVOS" target="_self">Preparando archivos modificados</a></li>
+			<li><a href="#IGNORANDOA" target="_self">Ignorando archivos</a></li>
+			<li><a href="#CAMBIOSPREPNOPREP" target="_self">Viendo tus cambios preparados y no preparados</a></li>
+			<li><a href="#CONFIRMCAMBIOS" target="_self">Confirmando tus cambios</a></li>
+			<li><a href="#SALTAR_PREP" target="_self">Saltándote el área de preparación</a></li>
+			<li><a href="#ELIMARCHIVOS" target="_self">Eliminando archivos</a></li>
+			<li><a href="#MOVERARCHIVOS" target="_self">Moviendo archivos</a></li>
 			
 		</article>
 		
 		<article class="subsection">
 		    <h1 id="COMPESTADO">Comprobando el estado de tus archivos</h1>
-		    <p>http://git-scm.com/book/es/Fundamentos-de-Git-Guardando-cambios-en-el-repositorio</p>
+		    <p>La principal herramienta para determinar qué archivos están en qué estado es el comando <em>git status</em>. Si ejecutas este comando justo después de clonar un repositorio, deberías ver algo así:</p>
+		    <pre><code>$ git status
+# On branch master
+nothing to commit, working directory clean</code></pre>
+            <p>Digamos que <em>añades un nuevo archivo</em> a tu proyecto, un sencillo archivo <em>README</em>. Si el archivo no existía y ejecutas git status, verás tus archivos sin seguimiento así:</p>
+            <pre><code>$ git status
+# On branch master
+# Untracked files:
+#   (use "git add &lt;file&gt;..." to include in what will be committed)
+#
+#   README
+nothing added to commit but untracked files present (use "git add" to track)</code></pre>
+            <p>Puedes ver que tu nuevo archivo README aparece bajo la cabecera <em>“Archivos sin seguimiento” (“Untracked files”)</em> de la salida del comando. Sin seguimiento significa básicamente que Git ve <em>un archivo que no estaba en la instantánea anterior</em>; Git no empezará a incluirlo en las confirmaciones de tus instantáneas hasta que se lo indiques explícitamente. Lo hace <em>para que no incluyas accidentalmente archivos</em> binarios generados u otros archivos que no tenías intención de incluir. </p>
+		</article>
+		
+		<article class="subsection">
+		    <h1 id="SIGUIENDONA">Seguimiento de nuevos archivos</h1>
+		    <p>Para empezar el seguimiento de un nuevo archivo se usa el comando <em>git add</em>:</p>
+		    <pre><code>git add [file|DIR]</code></pre>
+		    <p>El comando <em>git add</em> recibe la ruta de un archivo o de un directorio; si es un directorio, añade todos los archivos que contenga de manera recursiva.</p>
+		    <p>Una vez que se ha agregado una archivo para seguimiento podr+as ver con <em>git status</em> que el archivo está preparado porque aparecerá bajo la cabecera <em>"Cambios a confirmar"  (“Changes to be committed”)</em>. Si confirmas ahora, la versión del archivo en el momento de ejecutar <em>git add</em> será la que se incluya en la instantánea.</p>
+		    <pre><code>$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#   new file:   README
+#</code></pre>
+		</article>
+		
+		<article class="subsection">
+		    <h1 id="PREPARANDO_ARCHIVOS">Preparando archivos modificados</h1>
+		    <p>Si modificas un archivo que ya se encuentra bajo seguimiento, git le asignará el status <em>“Modificados pero no actualizados” (“Changes not staged for commit”)</em>, esto significa que el archivo ha sido modificado en el directorio de trabajo, pero no ha sido preparado todavía.</p>
+		    <p>Para prepararlo, ejecuta el comando <b>git add</b> seguido del nombre del archivo. Como puedes ver <em>git add</em> es un comando multiuso, puedes utilizarlo, por ejemplo, para:</p>
+		    <ul>
+		        <li>empezar el seguimiento de archivos nuevos,</li>
+		        <li>preparar archivos,</li>
+		        <li>marcar como resueltos archivos con conflictos de unión.</li>
+		    </ul>
+		</article>
+		
+		<article class="subsection">
+		    <h1 id="IGNORANDOA">Ignorando archivos</h1>
+		    <p></p>
 		</article>
 		
 	</body>
