@@ -101,7 +101,40 @@ nothing added to commit but untracked files present (use "git add" to track)</co
 		
 		<article class="subsection">
 		    <h1 id="IGNORANDOA">Ignorando archivos</h1>
-		    <p></p>
+		    <p>A menudo tendrás un tipo de archivos que no quieras que Git añada automáticamente o te muestre como no versionado. Suelen ser archivos generados automáticamente, como archivos de log, o archivos generados por tu compilador. Para estos casos puedes <em>crear un archivo llamado</em> <b>.gitignore</b> en la raiz de tu directorio, en el que listas los patrones de nombres que deseas que sean ignorados. He aquí un archivo .gitignore de ejemplo:</p>
+		    <pre><code>*.[oa]
+*~</code></pre>
+            <ul>
+                <li>La primera línea le dice a Git que ignore cualquier archivo cuyo nombre termine en .o o .a</li>
+                <li>La segunda línea le dice a Git que ignore todos los archivos que terminan en tilde (~), usada por muchos editores de texto, como Emacs, para marcar archivos temporales.</li>
+            </ul>
+            <p>También puedes incluir directorios de log, temporales, documentación generada automáticamente, etc. Configurar un archivo .gitignore antes<em></em> de empezar a trabajar suele ser una buena idea, para así no confirmar archivos que no quieres en tu repositorio Git.</p>
+            
+            <h2 id="">reglas para los patrones</h2>
+            <p>Las reglas para los patrones que pueden ser incluidos en el archivo <em>.gitignore</em> son:</p>
+            <ul>
+                <li>Las líneas en blanco, o que comienzan por <em></em>#, son ignoradas.</li>
+                <li>Puedes usar <em>patrones glob</em> estándar.</li>
+                <li>Puedes indicar un <em>directorio</em> añadiendo una barra hacia delante <em>(/)</em> al final.</li>
+                <li>Puedes <em>negar</em> un patrón añadiendo una exclamación <em>(!)</em> al principio.</li>
+            </ul>
+            <p>Los <em>patrones glob</em> son <em>expresiones regulares simplificadas</em> que pueden ser usadas por las shells. Un asterisco <em>(*)</em> reconoce cero o más caracteres; <em>[abc]</em> reconoce cualquier carácter de los especificados entre corchetes (en este caso, a, b o c); una interrogación <em>(?)</em> reconoce un único carácter; y caracteres entre corchetes separados por un guión <em>([0-9])</em> reconoce cualquier carácter entre ellos (en este caso, de 0 a 9).</p>
+            <p>He aquí otro ejemplo de archivo <em>.gitignore</em>:</p>
+            <pre><code># a comment – this is ignored
+# no .a files
+*.a
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+# only ignore the root TODO file, not subdir/TODO
+/TODO
+# ignore all files in the build/ directory
+build/
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+# ignore all .txt files in the doc/ directory
+doc/**/*.txt</code></pre>
+            
+		    
 		</article>
 		
 	</body>
