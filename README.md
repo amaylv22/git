@@ -1,5 +1,0 @@
-gitnotes
-========
-
-** Contenido
-
