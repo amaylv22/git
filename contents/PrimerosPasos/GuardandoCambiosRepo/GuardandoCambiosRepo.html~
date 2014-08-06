@@ -99,7 +99,7 @@ nothing added to commit but untracked files present (use "git add" to track)</co
 		    
 		    <h2 id="">saltándote el área de preparación</h2>
 		    <p>Aunque puede ser extremadamente útil para elaborar confirmaciones exactamente a tu gusto, el área de preparación es en ocasiones demasiado compleja para las necesidades de tu flujo de trabajo. Si quieres saltarte el área de preparación, Git proporciona un atajo. Pasar la opción <em>-a</em> al comando <em>git commit</em> hace que Git <em>prepare todo archivo que estuviese en seguimiento antes de la confirmación</em>, permitiéndote obviar toda la parte de <em>git add</em>:</p>
-		    <pre><code>git add -a</code></pre>
+		    <pre><code>git add -A</code></pre>
 		    
 		</article>
 		
@@ -181,7 +181,43 @@ doc/**/*.txt</code></pre>
 		    </ol>
 		    
 		    <h2 id="">eliminación total</h2>
-		    <p>El comando <em>git rm</em> se encarga de esto</p>
+		    <p>El comando <em>git rm</em> se encarga de esto:</p>
+		    <pre><code>git rm filename</code></pre>
+		    <p>El resultado será la eliminación del archivo de la copia de trabajo del repositorio, y el estado del archivo estará en la zona de preparación listo para su confirmación (commit).</p>
+		    <p>Este proceso puede ser llevado a cabo también eliminando manualmente de la copia de trabajo, el o los archivos no deseados y ejecutando después el comando:</p>
+		    <pre><code>git rm</code></pre>
+		    <p>Para llevar los cambios a la zona de preparación.</p>
+		    
+		    <p><em>La próxima vez que confirmes</em>, el archivo <em>desaparecerá</em> y <em>dejará de estar bajo seguimiento</em>. Si ya habías modificado el archivo y lo tenías en el área de preparación, deberás forzar su eliminación con la opción <em>-f</em>. Ésta es una medida de seguridad para evitar la eliminación accidental de información que no ha sido registrada en una instantánea, y que por tanto no podría ser recuperada.</p>
+		    
+		    <h2 id="">eliminación parcial</h2>
+		    <p>Otra cosa que puede que quieras hacer es <em>mantener el archivo en tu directorio</em> de trabajo, pero eliminarlo de tu área de preparación. Dicho de otro modo, puede que quieras mantener el archivo en tu disco duro, <em>pero interrumpir su seguimiento por parte de Git</em>. Esto resulta particularmente útil cuando olvidaste añadir algo a tu archivo .gitignore y lo añadiste accidentalmente, como un archivo de log enorme, o un montón de archivos .a. Para hacer esto, usa la opción <em>--cached</em>:</p>
+		    <pre><code>git --cached filename</code></pre>
+		    
+		    <article class="note">El comando <em>git rm</em> acepta archivos, directorios, y patrones glob. Es decir, que podrías hacer algo así: <pre><code>git rm log/\*.log</code></pre></article>
+		</article>
+		
+		<article class="subsection">
+		    <h1 id="MOVERARCHIVOS">Moviendo archivos</h1>
+		    <p>Git no hace un seguimiento explicito del movimiento de archivos. Si renombras un archivo, en Git no se almacena ningún metadato que indique que lo has renombrado. Sin embargo, Git es suficientemente inteligente como para darse cuenta.</p>
+		    <p>Por tanto, es un poco desconcertante que Git tenga un comando mv. Si quieres <em>renombrar un archivo en Git</em>, puedes ejecutar algo así:</p>
+		    <pre><code>git mv file_from file_to</code></pre>
+		    <p>Y funciona perfectamente. De hecho, cuando ejecutas algo así y miras la salida del comando <em>status</em>, verás que Git lo considera un archivo renombrado:</p>
+		    <pre><code>$ git mv README.txt README
+$ git status
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       renamed:    README.txt -> README
+#</code></pre>
+            <p>Sin embargo, esto es equivalente a ejecutar algo así:</p>
+            <pre><code>$ mv README.txt README
+$ git rm README.txt
+$ git add README</code></pre>
+            <p>Git se da cuenta de que es un renombrado de manera implícita, así que no importa si renombras un archivo de este modo, o usando el comando mv. La única diferencia real es que mv es un comando en vez de tres —es más cómodo—. Y lo que es más importante, puedes usar cualquier herramienta para renombrar un archivo, y preocuparte de los add y rm más tarde, antes de confirmar.</p>
 		</article>
 		
 	</body>
