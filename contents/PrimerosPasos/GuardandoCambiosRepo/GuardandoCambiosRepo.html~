@@ -50,7 +50,6 @@
 			<li><a href="#IGNORANDOA" target="_self">Ignorando archivos</a></li>
 			<li><a href="#CAMBIOSPREPNOPREP" target="_self">Viendo tus cambios preparados y no preparados</a></li>
 			<li><a href="#CONFIRMCAMBIOS" target="_self">Confirmando tus cambios</a></li>
-			<li><a href="#SALTAR_PREP" target="_self">Saltándote el área de preparación</a></li>
 			<li><a href="#ELIMARCHIVOS" target="_self">Eliminando archivos</a></li>
 			<li><a href="#MOVERARCHIVOS" target="_self">Moviendo archivos</a></li>
 			
@@ -97,6 +96,11 @@ nothing added to commit but untracked files present (use "git add" to track)</co
 		        <li>preparar archivos,</li>
 		        <li>marcar como resueltos archivos con conflictos de unión.</li>
 		    </ul>
+		    
+		    <h2 id="">saltándote el área de preparación</h2>
+		    <p>Aunque puede ser extremadamente útil para elaborar confirmaciones exactamente a tu gusto, el área de preparación es en ocasiones demasiado compleja para las necesidades de tu flujo de trabajo. Si quieres saltarte el área de preparación, Git proporciona un atajo. Pasar la opción <em>-a</em> al comando <em>git commit</em> hace que Git <em>prepare todo archivo que estuviese en seguimiento antes de la confirmación</em>, permitiéndote obviar toda la parte de <em>git add</em>:</p>
+		    <pre><code>git add -a</code></pre>
+		    
 		</article>
 		
 		<article class="subsection">
@@ -133,8 +137,51 @@ build/
 doc/*.txt
 # ignore all .txt files in the doc/ directory
 doc/**/*.txt</code></pre>
+
+            <article class="warning">Si incluyes en <em>.gitignore</em> un archivo que ya se encontraba bajo seguimiento, este no será ignorado hasta que los elimines del repositorio o de la lista de seguimiento.</article>
             
 		    
+		</article>
+		
+		<article class="subsection">
+		    <h1 id="CAMBIOSPREPNOPREP">Viendo tus cambios preparados y no preparados</h1>
+		    <p>Si el comando <em>git status</em> es <em>demasiado impreciso para ti</em> &mdash;quieres saber exactamente lo que ha cambiado, no sólo qué archivos fueron modificados&mdash; puedes usar el comando <em>git diff</em>. Probablemente lo usarás para responder estas dos preguntas: <em>¿qué has cambiado pero aún no has preparado?</em>, y <em>¿qué has preparado y estás a punto de confirmar?</em> Aunque <em>git status</em> responde esas preguntas de manera general, <em>git diff</em> te muestra exactamente las <em>líneas añadidas y eliminadas</em>.</p>
+		    <p>Ese comando compara lo que hay en tu directorio de trabajo con lo que hay en tu área de preparación. El resultado te indica los cambios que has hecho y que todavía no has preparado.</p>
+		    <p>Si quieres ver los <em>cambios</em> que has <em>preparado y que irán en tu próxima confirmación</em>, puedes usar <em>git diff –-cached</em> (a partir de la versión 1.6.1 de Git, también puedes usar <em>git diff –-staged</em>, que puede resultar más fácil de recordar.) Este comando <em>compara tus cambios preparados con tu última confirmación</em></p>
+		    <article class="note"><em>git diff</em> por sí solo no muestra todos los cambios hechos desde tu última confirmación &mdash;sólo los cambios que todavía no están preparados&mdash;. Esto puede resultar desconcertante, porque <em>si has preparado todos tus cambios</em>, <b>git diff</b> <em>no mostrará nada</em>.</article>
+		</article>
+		
+		<article class="subsection">
+		    <h1 id="CONFIRMCAMBIOS">Confirmando tus cambios</h1>
+		    <p>Una vez que el área de preparación está como tú quieres, puedes confirmar los cambios. Recuerda que <em>cualquier cosa que todavía esté sin preparar</em> &mdash;cualquier archivo que hayas creado o modificado, y sobre el que no hayas ejecutado <em>git add</em> desde su última edición&mdash; <em>no se incluirá en esta confirmación</em>. Se mantendrán como modificados en tu disco.</p>
+		    <h2 id="">commit desde editor de texto</h2>
+		    
+		    <p>La forma más fácil de confirmar es escribiendo <em>git commit</em>:</p>
+		    <pre><code>git commit</code></pre>
+		    <p>Al hacerlo, se ejecutará tu editor de texto. El editor contiene como comentarios la tabla de salida de l comando <em>git status</em>. Para un recordatorio todavía más explícito de lo que has modificado, puedes pasar la opción <em>-v</em> a <em>git commit</em>. Esto provoca que se añadan también las diferencias de tus cambios, para que veas exactamente lo que hiciste.</p>
+		    <p>Cuando sales del editor, Git crea tu confirmación con el mensaje que hayas especificado (omitiendo los comentarios y las diferencias).</p>
+		    
+		    <h2 id="">commit completo en una sola linea</h2>
+		    <p>Como alternativa, puedes escribir tu mensaje de confirmación desde la propia línea de comandos mediante la opción <em>-m</em>:</p>
+		    <pre><code>git commit -m "mensaje de la confirmación"</code></pre>
+		    		    
+		    <h2 id="">salida del comando</h2>
+		    <p>Una vez ejecutadoel <em>commit</em> podrás ver que como salida cierta información sobre la confirmación: a <em>qué rama has confirmado</em> (master), cuál es su <em>suma de comprobación SHA-1</em> de la confirmación (463dc4f), <em>cuántos archivos se modificaron</em>, y estadísticas acerca de cuántas líneas se han añadido y cuántas se han eliminado.</p>
+		    <p>Recuerda que la confirmación registra la <em>instantánea de tu área de preparación</em>. Cualquier cosa que no preparases sigue estando modificada; puedes hacer otra confirmación para añadirla a la historia del proyecto. Cada vez que confirmas, estás registrando una <em>instantánea de tu proyecto</em>, a la que puedes volver o con la que puedes comparar más adelante.</p>
+		    
+		</article>
+		
+		<article class="subsection">
+		    <h1 id="ELIMARCHIVOS">Eliminando archivos</h1>
+		    <p>Para eliminar un archivo de Git, debes eliminarlo de tus archivos bajo seguimiento (más concretamente, debes eliminarlo de tu área de preparación), y después confirmar.</p>
+		    <p>Debes tener en cuenta que el proceso de eliminación de archivos puede ocurrir en dos sentidos, dependiendo de tus necesidades:</p>
+		    <ol>
+		        <li><b>Eliminación total</b>: El archivo en cuestión será sacado de la lista de seguimiento y eliminado del directorio de trabajo. Una vez confirmado el cambio, el archivo no será parte del repositorio de este punto en adelante.</li>
+		        <li><b>Eliminación parcial</b>: El archivo no será parte del repositorio a partir de este punto, sin embargo deseas seguir contando con el en tu directorio de trabajo. Dicho de otro modo, el archivo será eliminado solo de la lista de seguimiento y por tanto del repositorio Git.</li>
+		    </ol>
+		    
+		    <h2 id="">eliminación total</h2>
+		    <p>El comando <em>git rm</em> se encarga de esto</p>
 		</article>
 		
 	</body>
