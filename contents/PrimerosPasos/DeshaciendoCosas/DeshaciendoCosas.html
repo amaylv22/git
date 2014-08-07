@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Deshaciendo cosas</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../../../KonoMngr/style/icons/konoicn.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../../../../KonoMngr/style/konoguides.css" />
+		<script src="../../../../../KonoMngr/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+  				TeX: { equationNumbers: { autoNumber: "AMS" } }
+			});</script>
+		<link rel="stylesheet" href="../../../../../KonoMngr/highlight/styles/googlecode.css">
+		<script src="../../../../../KonoMngr/highlight/highlight.pack.js" type="text/javascript"></script>
+		<script>hljs.initHighlightingOnLoad();</script>		
+	</head>
+	
+	<body class="kg-content">
+		<header>
+			<h1>Deshaciendo cosas</h1>
+		</header>
+		
+		<article class="subsection">
+			<p>En cualquier momento puedes querer <em>deshacer algo</em>. En esta sección veremos algunas herramientas básicas para deshacer cambios. <em>Ten cuidado</em>, porque no siempre puedes volver atrás después de algunas de estas operaciones. Ésta es una de las pocas áreas de Git que pueden provocar que pierdas datos si haces las cosas incorrectamente.</p>
+		</article>
+		
+		<article class="subsection">
+		    <h1>Modificando la última confirmación</h1>
+		    <p>Uno de los casos más comunes en el que quieres deshacer cambios es cuando confirmas demasiado pronto y te olvidas de añadir algún archivo, o te confundes al introducir el mensaje de confirmación. Si quieres volver a hacer la confirmación, puedes ejecutar un commit con la opción <em>--amend</em>:</p>
+		    <pre><code>git commit --amend</code></pre>
+		    <p>Este comando utiliza lo que haya en tu área de preparación para la confirmación. Si no has hecho ningún cambio desde la última confirmación (por ejemplo, si ejecutas este comando justo después de tu confirmación anterior), esta instantánea será exactamente igual, y lo único que cambiarás será el mensaje de confirmación.</p>
+		    <p>Se lanzará el editor de texto para que introduzcas tu mensaje, pero ya contendrá el mensaje de la confirmación anterior. Puedes editar el mensaje, igual que siempre, pero se sobreescribirá tu confirmación anterior.</p>
+		    <p>Por ejemplo, si confirmas y luego te das cuenta de que se te olvidó preparar los cambios en uno de los archivos que querías añadir, puedes hacer algo así:</p>
+		    <pre><code>git commit -m 'initial commit'
+git add forgotten_file
+git commit --amend</code></pre>
+             <p>Estos tres comandos acabarán convirtiéndose en una única confirmación &mdash;<em>la segunda confirmación reemplazará los resultados de la primera</em>.</p>
+		</article>
+		
+		<article class="subsection">
+		    <h1>Deshaciendo la preparación de un archivo</h1>
+		    <p>Digamos que has modificado dos archivos, y quieres confirmarlos como cambios separados, pero accidentalmente preparas ambos. <em>¿Cómo puedes sacar uno de ellos del área de preparación?</em> El comando git status te lo recuerda:</p>
+            <pre><code>git status</code></pre>
+		    <pre><code># On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       modified:   README.txt
+#       modified:   benchmarks.rb
+#</code></pre>
+            <p>Justo debajo de la cabecera "Cambios a confirmar" ("Changes to be committed"), dice que uses git <b>reset HEAD &lt;archivo&gt;...</b> para <em>sacar un archivo del área de preparación</em>. Vamos a aplicar ese consejo sobre <em>benchmarks.rb</em>:</p>
+            <pre><code>git reset HEAD benchmarks.rb
+benchmarks.rb: locally modified
+git status</code></pre>
+            <pre><code># On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#       modified:   README.txt
+#
+# Changes not staged for commit:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#       modified:   benchmarks.rb
+#</code></pre>
+            <p>El archivo benchmarks.rb ahora está modificado, no preparado.</p>
+		</article>
+		
+		<article class="subsection">
+		    <h1>Deshaciendo la modificación de un archivo</h1>
+		    <p>¿Qué pasa si te das cuenta de que <em>no quieres mantener las modificaciones que has hecho</em> sobre el archivo benchmarks.rb? ¿<em>Cómo puedes deshacerlas</em> fácilmente &mdash;revertir el archivo al mismo estado en el que estaba cuando hiciste tu última confirmación (o cuando clonaste el repositorio, o como quiera que metieses el archivo en tu directorio de trabajo)? Afortunadamente, <em>git status</em> también <em>te dice cómo</em> hacer esto. En la salida del último ejemplo, la cosa estaba así:</p>
+		    <pre><code># Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#       modified:   benchmarks.rb
+#</code></pre>
+            <p>Te dice de forma bastante explícita cómo descartar las modificaciones que hayas hecho. Vamos a hacer lo que dice:</p>
+            <pre><code>git <b>checkout</b> -- benchmarks.rb</code></pre>
+            <p>Una vez ejecutado puede ver el estatus para confirmar que se han revertido lo cambios. También deberías ser consciente del peligro de este comando: <em>cualquier modificación</em> hecha sobre este archivo <em>ha desaparecido</em> &mdash;acabas de sobreescribirlo con otro archivo&mdash;.</p>
+            <p>Si lo único que necesitas es olvidarte de él momentáneamente, veremos los conceptos de <em>apilamiento (stashing)</em> y <em>ramificación (branching)</em> en el próximo capítulo; en general son <em>formas más adecuadas de trabajar</em>.</p>
+		</article>  
+		
+	</body>
+</html>	
