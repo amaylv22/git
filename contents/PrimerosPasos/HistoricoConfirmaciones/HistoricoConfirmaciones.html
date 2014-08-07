@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Histórico de confirmaciones</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../../../KonoMngr/style/icons/konoicn.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../../../../KonoMngr/style/konoguides.css" />
+		<script src="../../../../../KonoMngr/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+  				TeX: { equationNumbers: { autoNumber: "AMS" } }
+			});</script>
+		<link rel="stylesheet" href="../../../../../KonoMngr/highlight/styles/googlecode.css">
+		<script src="../../../../../KonoMngr/highlight/highlight.pack.js" type="text/javascript"></script>
+		<script>hljs.initHighlightingOnLoad();</script>		
+	</head>
+	
+	<body class="kg-content">
+		<header>
+			<h1>Histórico de confirmaciones</h1>
+		</header>
+		
+		<article class="subsection">
+			<p>Después de haber hecho varias confirmaciones, o si has clonado un repositorio que ya tenía un histórico de confirmaciones, probablemente quieras mirar atrás para ver qué modificaciones se han llevado a cabo. La herramienta más básica y potente para hacer esto es el comando <b>git log</b>, que al ser ejecutado orroja una salida similar a esta:</p>
+			<pre><code>commit 230a1fbffceedfc7a4bf6320a1ac037c77acd5bc
+Author: Jorge Luis &lt;jorgeluisrmx@gmail.com&gt;
+Date:   Wed Aug 6 10:20:19 2014 -0500
+
+    Seccion 2.2 completa
+
+commit 8bc44e2575a64ec8c1f1cbcbca4ff80c3a01e615
+Author: Jorge Luis &lt;jorgeluisrmx@gmail.com&gt;
+Date:   Wed Aug 6 10:06:06 2014 -0500
+
+    Eliminacion con git rm filename de la copia de seguridad de git.html
+
+commit 90e672b1cde52329d9888c6e128c82df81257c7e
+Author: Jorge Luis &lt;jorgeluisrmx@gmail.com&gt;
+Date:   Tue Aug 5 09:09:31 2014 -0500
+
+    README.md fuera de seguimiento
+
+commit 230a1fbffceedfc7a4bf6320a1ac037c77acd5bc
+Author: Jorge Luis &lt;jorgeluisrmx@gmail.com&gt;
+Date:   Wed Aug 6 10:20:19 2014 -0500
+
+    Seccion 2.2 completa
+
+commit 8bc44e2575a64ec8c1f1cbcbca4ff80c3a01e615
+Author: Jorge Luis &lt;jorgeluisrmx@gmail.com&gt;
+Date:   Wed Aug 6 10:06:06 2014 -0500
+
+    Eliminacion con git rm filename de la copia de seguridad de git.html</code></pre>
+    
+        <p> Como puedes ver, este comando lista cada confirmación con su suma de comprobación SHA-1, el nombre y dirección de correo del autor, la fecha y el mensaje de confirmación.</p>
+		<p>El comando git log<em></em> proporciona <em>gran cantidad de opciones</em> para mostrarte exactamente lo que buscas. Aquí veremos algunas de las más usadas.</p>
+		</article>
+		
+		<article class="subsection">
+		    <h1>Limitando la salida del histórico</h1>
+		    <p>Git cuenta con una serie de opciones para limitar su salida &mdash;es decir, opciones que te permiten mostrar únicamente parte de las confirmaciones&mdash;.</p>
+		    <h2 id="">mostrar las últimas \(n\) confirmaciones</h2>
+		    
+		    <p>Para mostrar los último \(n\) commits, agrega la opción <b>-n</b> donde \(n\in \{1,2,3,\ldots\}\):</p> 
+		    <pre><code>git log -n</code></pre>
+		    
+		    <h2 id="">limitando por fecha</h2>
+		    <p>Es posible limitar las salidas del <em>log</em> por medio de las opciones <em>--since</em> y <em>--after</em> muestra aquellas confirmaciones hechas después de la fecha especificada. Mientras que <em>--until</em> y <em>--before</em> muestran aquellas confirmaciones hechas antes de la fecha especificada.</p>
+		    <p>Por ejemplo, este comando lista todas las confirmaciones hechas durante las dos últimas semanas:</p>
+		    <pre><code>git log --since=2.weeks</code></pre>
+		    <p>Este comando acepta <em>muchos formatos</em>. Puedes indicar una <em>fecha concreta (“2008-01-15”)</em>, o <em>relativa</em>, como "2 years 1 day 3 minutes ago".</p>
+		    
+		    <h2 id="">filtrando por autor</h2>
+		    <p>La opción --author te permite filtrar por autor:</p>
+		    <pre><code>git log --author=gitster</code></pre>
+		    
+		    <h2 id="">filtrando por palabras clave</h2>
+		    <p>Para filtrar usando palabras claves en los mensajes de confirmación usa la opción <em>--grep</em>.</p>
+		    <p>Por otro lado si deseas excluir todas las confirmaciones correspondientes a uniones (merges) usa la opción <em>--no-merges</em>.</p>
+		    
+		    <h2 id="">filtros multicriterio</h2>
+		    <p>Cuando se limita la salida del comando <em>log</em> usando múltiples criterios, por defecto se obtendrán todas aquellas confirmaciones que cumplan con alguno de los criterios, como si de la operación lógica <em>OR</em> se tratara. Si deseas por el contrario aplicar la operación lógica <em>AND</em> debes usar la opción <b>--all-match</b>.</p>
+		    <h2 id="">filtrando por contenido de directorio</h2>
+		    <p>Una opción verdaderamente útil para filtrar la salida de <em>git log</em> es especificar una ruta. Si especificas la ruta de un directorio o archivo, puedes limitar la salida a aquellas <em>confirmaciones que introdujeron un cambio en dichos archivos</em>. Ésta debe ser <b>siempre la última opción</b>, y suele ir precedida de dos guiones <em>(--)</em> para separar la ruta del resto de opciones.</p>
+		    <pre><code>git log --since="2008-10-01" --no-merges -- t/</code></pre>
+		    
+		    
+		    
+		</article>
+		
+		<article class="subsection">
+		    <h1>Mostrar las diferencias introducidas en cada confirmación</h1>
+		    <p>Podemos pedir que se muestran las diferencias introducidas en cada confirmacción utilizando la opción <em>-p</em></p>
+		    <pre><code>git log -p</code></pre>
+		    <pre><code>commit ca82a6dff817ec66f44342007202690a93763949
+Author: Scott Chacon <schacon@gee-mail.com>
+Date:   Mon Mar 17 21:52:11 2008 -0700
+
+    changed the version number
+
+diff --git a/Rakefile b/Rakefile
+index a874b73..8f94139 100644
+--- a/Rakefile
++++ b/Rakefile
+@@ -5,7 +5,7 @@ require 'rake/gempackagetask'
+ spec = Gem::Specification.new do |s|
+-    s.version   =   "0.1.0"
++    s.version   =   "0.1.1"
+     s.author    =   "Scott Chacon"</code></pre>
+            <p>Esta opción muestra la misma información, pero añadiendo tras cada entrada las diferencias que le corresponden. Esto resulta muy útil para revisiones de código, o para visualizar rápidamente lo que ha pasado en las confirmaciones enviadas por un colaborador.</p>
+            
+            <h2 id="">cambios a nivel de palabra</h2>
+            <p>A veces es más fácil revisar cambios a nivel de palabra que a nivel de línea. Git dispone de la opción <em>--word-diff</em>, que se puede añadir al comando <em>git log -p</em> para obtener las diferencias por palabras en lugar de las diferencias línea por línea. Formatear las diferencias a nivel de palabra es bastante inusual cuando se aplica a código fuente, pero resulta muy práctico cuando se aplica a grandes archivos de texto, como libros o tu propia tesis. He aquí un ejemplo:</p>
+            <pre><code>git log -U1 -p --word-diff</code></pre>
+            <p>Como se puede ver, no aparecen líneas añadidas o eliminadas en la salida como en las diferencias normales. Se puede ver la palabra añadida encerrada en <em>{+ +}</em> y la eliminada en <em>[- -]</em>. Puede que se quiera reducir las usuales tres líneas de contexto en las diferencias a sólo una línea puesto que el contexto es ahora de palabras, no de líneas. Se puede hacer esto con <em>-U1</em>, como hicimos en el ejemplo de arriba.</p>
+		</article>
+		
+		<article class="subsection">
+		    <h1>Estadísticas de cada confirmación</h1>
+		    <p>Para ver algunas estadísticas de cada confirmación, usa la opcion <em>--stat</em>, que imprime tras cada confirmación una lista de archivos modificados, indicando cuántos han sido modificados y cuántas líneas han sido añadidas y eliminadas para cada uno de ellos, y un resumen de toda esta información.</p>
+		    <pre><code>git log --stat</code></pre>
+		    <h2 id="">resumen de las estadísticas</h2>
+		    <p>La opción <em>--shortstat</em> muestra solamente la línea de resumen de la opción <em>--stat</em>.</p>
+		    <pre><code>git log --shortstat</code></pre>
+		    
+		</article>
+		
+		<article class="subsection">
+		    <h1>Lista de archivos modificados</h1>
+		    <p>Es posible ver exactamente que archivos se han modificado en cada confirmación, agregando al comando <em>git log</em> una de las siguientes opciones.</p>
+		    <p>Si tu objetivo es mostrar solamente la lista de todos los archivos afectados en la confirmación, es decir, todos aquellos archivos añadidos, modificados o afectados, basta con usar la opción <em>--name-only</em>:</p>
+		    <pre><code>git log --name-only</code></pre>
+		    <p>Si además deseamos que la lista indique explisitamente si los archivos fueron añadidos, modificados o eliminados, deberás usar la opción <em>--name-status</em>.</p>
+		    <pre><code>git log --name-status</code></pre>
+		</article>  
+		
+		<article class="subsection">
+		    <h1>Modificando el formato de salida</h1>
+		    <p>La opción <em>--pretty</em> modifica el formato de salida. Tienes unos cuantos estilos disponibles. La opción <em>oneline</em> imprime cada confirmación en una única línea, lo que puede resultar útil si estás analizando gran cantidad de confirmaciones. Otras opciones son <em>short</em>, <em>full</em> y <em>fuller</em>, que muestran la salida en un formato parecido, pero añadiendo menos o más información, respectivamente:</p>
+		    <pre><code>git log --pretty=oneline</code></pre>
+		    
+		    <h2 id="">opciones rápidas de formato</h2>
+		    <pre><code>--abbrev-commit</code></pre>
+		    <p>Muestra solamente los primeros caracteres de la suma SHA-1, en vez de los 40 caracteres de que se compone.</p>
+		    <pre><code>--relative-date</code></pre>
+		    <p>Muestra la fecha en formato relativo (por ejemplo, “2 weeks ago” (“hace 2 semanas”)) en lugar del formato completo.</p>
+		    
+		    
+		    <h2 id="">opción format</h2>
+		    <p>La opción más interesante es format, que te permite especificar tu propio formato. Esto resulta especialmente útil si estás generando una salida para que sea analizada por otro programa:</p>
+		    <pre><code>git log --pretty=format:"%h - %an, %ar : %s"</code></pre>
+		    <p><a href="" target="_self"></a>a siguiente lista algunas de las opciones más útiles aceptadas por <em>format</em>.</p>
+		    <table border="0" cellspacing="5" cellpadding="10px" style="text-align: left; margin-left: auto; margin-right: auto;">
+		        <caption></caption>
+		        <thead>
+		            <tr>
+		                <th>Opción</th>
+		                <th>Descripción de la salida</th>
+		                <th>Opción</th>
+		                <th>Descripción de la salida</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr>
+		                <td>%H</td>
+		                <td>Hash de la confirmación</td>
+		                <td>%h</td>
+		                <td>Hash de la confirmación abreviado</td>
+		            </tr>
+		            <tr>
+		                <td>%T</td>
+		                <td>Hash del árbol</td>
+		                <td>%t</td>
+		                <td>Hash del árbol abreviado</td>
+		            </tr>
+		            <tr>
+		                <td>%P</td>
+		                <td>Hashes de las confirmaciones padre</td>
+		                <td>%p</td>
+		                <td>Hashes de las confirmaciones padre abreviados</td>
+		            </tr>
+		            <tr>
+		                <td>%an</td>
+		                <td>Nombre del autor</td>
+		                <td>%ae</td>
+		                <td>Dirección de correo del autor</td>
+		            </tr>
+		            <tr>
+		                <td>%ad</td>
+		                <td>Fecha de autoría (el formato respeta la opción -–date)</td>
+		                <td>%ar</td>
+		                <td>Fecha de autoría, relativa</td>
+		            </tr>
+		            <tr>
+		                <td>%cn</td>
+		                <td>Nombre del confirmador</td>
+		                <td>%ce</td>
+		                <td>Dirección de correo del confirmador</td>
+		            </tr>
+		            <tr>
+		                <td>%cd</td>
+		                <td>Fecha de confirmación</td>
+		                <td>%cr</td>
+		                <td>Fecha de confirmación, relativa</td>
+		            </tr>
+		            <tr>
+		                <td>%s</td>
+		                <td>Asunto</td>
+		            </tr>
+		        </tbody>
+		    </table>
+		    
+		    <h2 id="">opción graph</h2>
+		    <p>Las opciones <em>oneline</em> y <em>format</em> son especialmente útiles combinadas con otra opción llamada <b>--graph</b>. Ésta añade un <em>pequeño gráfico ASCII</em> mostrando tu <em>histórico de ramificaciones y uniones</em>, como podemos ver en el siguiente ejemplo:</p>
+            <pre><code>git log --pretty=format:"%h %s" --graph</code></pre>
+		    <pre><code>* 2d3acf9 ignore errors from SIGCHLD on trap
+*  5e3ee11 Merge branch 'master' of git://github.com/dustin/grit
+|\
+| * 420eac9 Added a method for getting the current branch.
+* | 30e367c timeout code and tests
+* | 5a09431 add timeout protection to grit
+* | e1193f8 support for heads with slashes in them
+|/
+* d6016bc require time for xmlschema
+*  11d191e Merge branch 'defunkt' into local</code></pre>
+		</article>
+		
+	</body>
+</html>	
